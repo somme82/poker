@@ -1,0 +1,31 @@
+* {
+  font-family: "Comic Sans MS";
+  font-size: large;
+}
+
+.poker-toolbar
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+}
+
+.poker-toolbar-item{
+  float: left;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.poker-toolbar-item:hover {
+  background-color: #ddd;
+}
+
+.poker-toolbar-item.right{
+  float:right;
+}
+

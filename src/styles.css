@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+html{
+  height: 100%;
+}
+
+body{
+  font-family: "Comic Sans MS" !important;
+  margin: 0px !important;
+  height: 100%;
+}
+
+div.fnpc-headline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15%;
+  background-color: #555;
+  color: white;
+  text-shadow: none;
+}

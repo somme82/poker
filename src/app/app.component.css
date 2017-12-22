@@ -1,38 +1,26 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-* {
-  font-family: "Comic Sans MS" !important;
-  font-size: large;
+a.fnpc-menu-item:active{
+  background-color: #a38382 !important;
 }
 
-.poker-toolbar
-{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
+div.fnpc-menu-top {
+  height: 12% !important;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.poker-toolbar-item{
-  list-style-type: none;
-  overflow: hidden;
-
-
-  float: left;
-  color: #666;
+div.fnpc-menu-bottom,div.fnpc-menu-top a.fnpc-menu-item{
+  display: table-cell;
+  float: none!important;
+  height: 100%;
+  vertical-align: middle;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  cursor: hand !important;
+  background-color: white;
 }
 
-.poker-toolbar-item:hover {
-  background-color: #ddd;
-}
-
-.poker-toolbar-item.right{
-  float:right;
+a.fnpc-menu-item:hover {
+  background-color: #ddd !important;
 }
 
 

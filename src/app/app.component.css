@@ -1,7 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
-  font-family: "Comic Sans MS";
+  font-family: "Comic Sans MS" !important;
   font-size: large;
 }
 
@@ -34,4 +34,6 @@
 .poker-toolbar-item.right{
   float:right;
 }
+
+
 

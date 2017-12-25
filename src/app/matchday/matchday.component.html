@@ -1,2 +1,5 @@
 <div class="fnpc-headline">Spieltag</div>
 <div class="fnpc-content">Matchday works</div>
+<div *ngFor="let player of players | async">
+  <h3>{{ player | json }}</h3>
+</div>

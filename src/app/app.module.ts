@@ -7,10 +7,14 @@ import { ScoretableComponent } from './scoretable/scoretable.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { HomeComponent } from './home/home.component';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -25,6 +29,8 @@ import { AppRoutingModule } from './/app-routing.module';
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

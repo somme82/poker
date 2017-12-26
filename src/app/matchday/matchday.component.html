@@ -1,5 +1,27 @@
-<div class="fnpc-headline">Spieltag</div>
-<div class="fnpc-content">Matchday works</div>
-<div *ngFor="let player of players | async">
-  <h3>{{ player | json }}</h3>
+<div class="fnpc-headline">
+  <span class="fnpc-pull-left"><img src="../../assets/images/carat-l-white.svg"></span>
+  Spieltag 
+  <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
+</div>
+<div class="fnpc-content">
+  <div class="fnpc-profile" *ngFor="let score of scores | async">
+    <div class="fnpc-profile-avatar">
+      <img src="../../assets/images/home-black.svg">
+    </div>
+    <div class="fnpc-profile-head">
+      <strong></strong>
+      <span class="fnpc-pull-right"><strong>Totalscore €</strong></span>
+    </div>
+    <div class="fnpc-profile-rebuy">{{score.ID}} {{score.Value}}</div>
+  </div>
+</div>
+
+
+<div class="fnpc-menu-bottom">
+    <a class="fnpc-menu-item"><img src="../../assets/images/recycle-white.svg"></a>
+    <a class="fnpc-menu-item"><img src="../../assets/images/plus-white.svg"></a>
+    <a class="fnpc-menu-item"><img src="../../assets/images/info-white.svg"></a>
+    <a class="fnpc-menu-item"><img src="../../assets/images/star-white.svg"></a>
+    <a class="fnpc-menu-item"><img src="../../assets/images/edit-white.svg"></a>
+    <a class="fnpc-menu-item"><img src="../../assets/images/mail-white.svg"></a>
 </div>

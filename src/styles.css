@@ -3,7 +3,7 @@ html{
 }
 
 body{
-  font-family: "Comic Sans MS" !important;
+  font-family: "Arial" !important;
   margin: 0px !important;
   height: 100%;
 }
@@ -12,8 +12,51 @@ div.fnpc-headline {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 15%;
+  height: 10%;
   background-color: #555;
   color: white;
   text-shadow: none;
+}
+
+div.fnpc-content {
+  width: 100% !important;
+  height: 74% !important;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+div.fnpc-menu-bottom {
+  height: 9% !important;
+  background-color: #555;
+  color: white;
+  text-shadow: none;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+div.fnpc-menu-bottom a.fnpc-menu-item {
+  display: table-cell;
+  width: 1%;
+  float: none!important;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  cursor: hand !important;
+}
+
+.fnpc-pull-left{
+  float: left!important;
+  margin-right: 30px;
+  cursor: hand;
+}
+
+.fnpc-pull-right{
+  float: right!important;
+  margin-left: 30px;
+  cursor: hand;
+}
+
+img.arrow {
+  margin: 0px !important;
 }

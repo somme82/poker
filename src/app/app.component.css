@@ -3,7 +3,7 @@ a.fnpc-menu-item:active{
 }
 
 div.fnpc-menu-top {
-  height: 12% !important;
+  height: 8% !important;
   display: table;
   width: 100%;
   table-layout: fixed;
@@ -22,6 +22,7 @@ div.fnpc-menu-bottom,div.fnpc-menu-top a.fnpc-menu-item{
 a.fnpc-menu-item:hover {
   background-color: #ddd !important;
 }
+
 
 
 

@@ -1,2 +1,23 @@
-<div class="fnpc-headline">Rangliste</div>
-<div class="fnpc-content">Scoretable works</div>
+<div class="fnpc-headline">
+  <span class="fnpc-pull-left"><img src="../../assets/images/carat-l-white.svg"></span>
+  Rangliste
+  <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
+</div>
+<div class="fnpc-content">
+  <div class="fnpc-profile" *ngFor="let score of scores | async">
+    <div class="fnpc-profile-avatar">
+      <img src="../../assets/images/home-black.svg">
+    </div>
+    <div class="fnpc-profile-head">
+      <strong></strong>
+      <span class="fnpc-pull-right"><strong>Totalscore €</strong></span>
+    </div>
+    <div class="fnpc-profile-rebuy">{{score.ID}} {{score.Value}}</div>
+  </div>
+</div>
+<div class="fnpc-menu-bottom">
+  <a class="fnpc-menu-item"><img src="../../assets/images/plus-white.svg"></a>
+  <a class="fnpc-menu-item"><img src="../../assets/images/user-white.svg"></a>
+  <a class="fnpc-menu-item"><img src="../../assets/images/bars-white.svg"></a>
+  <a class="fnpc-menu-item"><strong>Alle</strong></a>
+</div>

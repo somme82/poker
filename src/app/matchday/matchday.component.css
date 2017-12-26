@@ -1,0 +1,26 @@
+div.fnpc-profile{
+  width: 100%;
+  float: right;
+}
+
+div.fnpc-profile-avatar img{
+  width: 10%;
+  float: left;
+  margin: 0 20px 0px 0;
+  position: relative;
+  pointer-events: none;
+}
+
+div.fnpc-profile-head{
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+div.fnpc-profile-rebuy{
+  color: #999;
+  margin: 0 0 10px 0;
+  font-size: 90%;
+  float: left;
+}

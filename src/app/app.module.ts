@@ -31,7 +31,8 @@ import {GlobalVars} from '../globalVars';
     MaterialModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [GlobalVars],
   bootstrap: [AppComponent]

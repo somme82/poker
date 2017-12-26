@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GlobalVars} from '../../globalVars';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  headlineTest: 'Home';
 
-  constructor() { }
+  constructor(private globalVars: GlobalVars) {}
 
   ngOnInit() {
   }

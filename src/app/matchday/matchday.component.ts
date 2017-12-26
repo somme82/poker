@@ -3,10 +3,14 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import {GlobalVars} from '../../globalVars';
 
-interface Player {
-  id: string;
-  name: string;
+
+
+interface Score {
+  ID: string;
+  Player_id: string;
+  Value: string;
 }
 
 
@@ -18,16 +22,18 @@ interface Player {
 
 
 export class MatchdayComponent implements OnInit {
-  playersCollection: AngularFirestoreCollection<Player>;
-  players: Observable<Player[]>;
+  scoreCollection: AngularFirestoreCollection<Score>;
+  scores: Observable<Score[]>;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private globalVars: GlobalVars) {}
 
 
   ngOnInit(): void {
-    this.playersCollection = this.firestore.collection('Players');
 
-    this.players = this.playersCollection.valueChanges();
+    this.globalVars.matchdayId = 3;
+
+    this.scoreCollection = this.firestore.collection('Score');
+    this.scores = this.scoreCollection.valueChanges();
 
   }
 

@@ -15,6 +15,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {environment} from '../environments/environment';
+import {GlobalVars} from '../globalVars';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import {environment} from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [GlobalVars],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

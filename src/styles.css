@@ -18,6 +18,18 @@ div.fnpc-headline {
   text-shadow: none;
 }
 
+div.fnpc-dialog-headline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #999999;
+  color: white;
+  text-shadow: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
 div.fnpc-content {
   width: 100% !important;
   height: 74% !important;
@@ -59,4 +71,56 @@ div.fnpc-menu-bottom a.fnpc-menu-item {
 
 img.arrow {
   margin: 0px !important;
+}
+.fnpc-dialog{
+  width: 80% !important;
+  //height: 50% !important;
+  background-color: white;
+  position: absolute !important;
+  position: absolute !important;
+  top: 20% !important;
+  left: 10%;
+}
+
+
+div.fnpc-table {
+  display: table;
+  border-collapse:collapse;
+}
+div.fnpc-table-row {
+  display:table-row;
+}
+div.fnpc-table-cell {
+  display:table-cell;
+  padding:5px;
+}
+
+
+.mat-dialog-container {
+  padding: 0px !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 24px !important;
+}
+
+.mat-dialog-actions{
+
+}
+
+.mat-dialog-container {
+  box-shadow: unset !important;
+  padding: unset !important;
+  display: block;
+  box-sizing: unset !important;
+  overflow: unset !important;
+  outline: unset !important;
+  width: 100%;
+  height: 100%;
+
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 24px !important;
+  border: 1px solid black;
 }

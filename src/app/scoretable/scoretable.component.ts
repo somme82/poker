@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
 import {Observable} from 'rxjs/Observable';
+import { MatDialog } from '@angular/material';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
-interface Players {
-  ID: string;
-  Name: string;
-  Value: string;
+export interface IPlayer {
+  name: string;
 }
 
 @Component({
@@ -15,22 +15,25 @@ interface Players {
 })
 export class ScoretableComponent implements OnInit {
 
-  playersDocument: AngularFirestoreDocument<Players>;
-  players: Observable<Players>;
+  playersCollection: AngularFirestoreCollection<IPlayer>;
+  players: Observable<IPlayer[]>;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog) {
+  }
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      panelClass: 'fnpc-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   ngOnInit() {
-    this.playersDocument = this.firestore.doc('Players');
+    this.playersCollection = this.firestore.collection('players');
+    this.players = this.playersCollection.valueChanges();
   }
-
-  newUser() {
-    console.log("inserting new user...");
-    // Add a new document in collection "cities"
-    this.firestore.collection("Players").doc("test").set({
-      name: "Test User",
-      ID: "2"
-    })
-  }
-
 }

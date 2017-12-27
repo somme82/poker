@@ -7,10 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: MatchdayComponent},
   { path: 'matchday', component: MatchdayComponent },
   { path: 'scoretable', component: ScoretableComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'articles', component: ArticlesComponent }
 ];
 

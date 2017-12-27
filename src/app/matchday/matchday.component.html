@@ -4,24 +4,23 @@
   <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
 </div>
 <div class="fnpc-content">
-  <div class="fnpc-profile" *ngFor="let score of scores | async">
+  <div class="fnpc-profile" *ngFor="let score of scores | async; let i = index">
     <div class="fnpc-profile-avatar">
       <img src="../../assets/images/home-black.svg">
     </div>
     <div class="fnpc-profile-head">
-      <strong></strong>
-      <span class="fnpc-pull-right"><strong>Totalscore €</strong></span>
+      <strong>#{{i + 1}} {{score.player}}</strong>
+      <span class="fnpc-pull-right"><strong>{{ score.value - score.buyin}} €</strong></span>
     </div>
-    <div class="fnpc-profile-rebuy">{{score.ID}} {{score.Value}}</div>
+    <div class="fnpc-profile-rebuy">BuyIn: {{score.buyin}} € | Chips: {{score.value}} € </div>
   </div>
 </div>
 
 
 <div class="fnpc-menu-bottom">
-    <a class="fnpc-menu-item"><img src="../../assets/images/recycle-white.svg"></a>
-    <a class="fnpc-menu-item"><img src="../../assets/images/plus-white.svg"></a>
+    <a class="fnpc-menu-item" mat-button (click)="openScoreDialog()"><img src="../../assets/images/recycle-white.svg"></a>
     <a class="fnpc-menu-item"><img src="../../assets/images/info-white.svg"></a>
     <a class="fnpc-menu-item"><img src="../../assets/images/star-white.svg"></a>
     <a class="fnpc-menu-item"><img src="../../assets/images/edit-white.svg"></a>
-    <a class="fnpc-menu-item"><img src="../../assets/images/mail-white.svg"></a>
+    <!--a class="fnpc-menu-item"><img src="../../assets/images/mail-white.svg"></a-->
 </div>

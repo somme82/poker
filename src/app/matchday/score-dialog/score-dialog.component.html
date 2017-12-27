@@ -1,0 +1,13 @@
+<div class="fnpc-dialog-headline">Neuen Spielstand eintragen</div>
+<mat-dialog-content>
+  <div class="fnpc-table">
+    <div class="fnpc-table-row">
+      <div class="fnpc-table-cell">Spielstand</div>
+      <div class="fnpc-table-cell"><input cdkFocusInitial type="text" [(ngModel)]="playerScore"/></div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" (click)="insertScore()">Spieler anlegen</button>
+  <button mat-button [mat-dialog-close]="true">Abbrechen</button>
+</mat-dialog-actions>

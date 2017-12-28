@@ -61,21 +61,8 @@ import {Observable} from 'rxjs/Observable';
 })
 export class AppModule {
 
-  matchdayCollection: AngularFirestoreCollection<IMatchday>;
-  matchdays: any;
+  constructor() {}
 
-  constructor(private firestore: AngularFirestore) {
-    console.log("constructor");
-    this.matchdayCollection = this.firestore.collection('matchdays', ref => ref.orderBy('date', 'desc'));
-    this.matchdays = this.matchdayCollection.snapshotChanges()
-      .map(actions => {
-        return actions.map( a => {
-          const data = a.payload.doc.data() as IMatchday;
-          const id = a.payload.doc.id;
-          return {id, data};
-        });
-      });
-    console.log(this.matchdays);
-  }
+
 }
 

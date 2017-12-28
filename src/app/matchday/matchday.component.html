@@ -1,7 +1,7 @@
 <div class="fnpc-headline">
-  <span class="fnpc-pull-left"><img src="../../assets/images/carat-l-white.svg"></span>
+  <span class="fnpc-pull-left" (click)="getPreviousMatchday()"><img src="../../assets/images/carat-l-white.svg"></span>
   Spieltag
-  <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
+  <span class="fnpc-pull-right" (click)="getNextMatchday()"><img src="../../assets/images/carat-r-white.svg"></span>
 </div>
 <div class="fnpc-content">
   <div [ngClass]="{'fnpc-profile': true, 'active': score.data.player == globalVars.selectedPlayer}" *ngFor="let score of scores | async; let i = index" (click)="getScore( score.data.player, score.id )">

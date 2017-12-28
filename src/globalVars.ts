@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalVars {
-  matchdayId: string = 'qyyaOd3yfKJPbCkWHHBs';
+  matchdayId: string = '';
   selectedPlayer: string =  '';
   selectedScore: string = '';
 }

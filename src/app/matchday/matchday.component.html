@@ -1,6 +1,6 @@
 <div class="fnpc-headline">
   <span class="fnpc-pull-left"><img src="../../assets/images/carat-l-white.svg"></span>
-  Spieltag {{ this.globalVars.matchdayId }}
+  Spieltag
   <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
 </div>
 <div class="fnpc-content">
@@ -8,11 +8,11 @@
     <div class="fnpc-profile-avatar">
       <img src="../../assets/images/home-black.svg">
     </div>
-    <div class="fnpc-profile-head">
-      <strong>#{{i + 1}} {{score.player}}</strong>
-      <span class="fnpc-pull-right"><strong>{{ score.value - score.buyin}} €</strong></span>
+    <div class="fnpc-profile-head" (click)="getScore( score.data.player, score.id )">
+      <strong>#{{i + 1}} {{score.data.player}}</strong>
+      <span class="fnpc-pull-right"><strong>{{ score.data.value - score.data.buyin}} €</strong></span>
     </div>
-    <div class="fnpc-profile-rebuy">BuyIn: {{score.buyin}} € | Chips: {{score.value}} € </div>
+    <div class="fnpc-profile-rebuy">BuyIn: {{score.data.buyin}} € | Chips: {{score.data.value}} € </div>
   </div>
 </div>
 

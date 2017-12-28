@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
+import { GlobalVars } from '../../globalVars';
 import 'rxjs/add/operator/map';
-
-import {GlobalVars} from '../../globalVars';
 import {ScoreDialogComponent} from './score-dialog/score-dialog.component';
 
 
 
-interface scores {
+export interface IScore {
   player: string;
   value: string;
+  matchday: string;
+  buyin: number;
+}
+
+interface IScore_id extends IScore{
+  id: string;
 }
 
 @Component({
@@ -22,18 +27,25 @@ interface scores {
 
 
 export class MatchdayComponent implements OnInit {
-  scoreCollection: AngularFirestoreCollection<scores>;
-  scores: Observable<scores[]>;
+  scoreCollection: AngularFirestoreCollection<IScore>;
+  scores: any;
 
-  constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog) {}
 
+  scoreDoc: AngularFirestoreDocument<IScore>;
+  score: Observable<IScore>;
+
+  constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
-
-    this.globalVars.matchdayId = 3;
-
-    this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', 'qyyaOd3yfKJPbCkWHHBs'));
-    this.scores = this.scoreCollection.valueChanges();
+    this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', this.globalVars.matchdayId).orderBy('value', 'asc'));
+    this.scores = this.scoreCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map( a => {
+          const data = a.payload.doc.data() as IScore;
+          const id = a.payload.doc.id;
+          return {id, data};
+        });
+      });
   }
 
   openScoreDialog() {
@@ -46,4 +58,12 @@ export class MatchdayComponent implements OnInit {
     });
   }
 
+  getScore( playerid, scoreid ) {
+    this.globalVars.selectedPlayer = playerid;
+    this.globalVars.selectedScore = scoreid;
+  }
+
+  /*this.scoreDoc = this.firestore.doc('scores/' + playerId);
+  this.score = this.scoreDoc.valueChanges();
+  console.log(this.scoreDoc.ref.path);*/
 }

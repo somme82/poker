@@ -4,15 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
 import { GlobalVars } from '../../globalVars';
 import 'rxjs/add/operator/map';
-import {ScoreDialogComponent} from './score-dialog/score-dialog.component';
-
+import { ScoreDialogComponent } from './score-dialog/score-dialog.component';
+import { UserToMatchdayDialogComponent } from './user-to-matchday-dialog/user-to-matchday-dialog.component';
+import {MatchdayDialogComponent} from './matchday-dialog/matchday-dialog.component';
 
 
 export interface IScore {
   player: string;
-  value: string;
+  chips: number;
   matchday: string;
   buyin: number;
+  totalscore: number;
 }
 
 interface IScore_id extends IScore{
@@ -37,7 +39,7 @@ export class MatchdayComponent implements OnInit {
   constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
-    this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', this.globalVars.matchdayId).orderBy('value', 'asc'));
+    this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', this.globalVars.matchdayId).orderBy('totalscore', 'desc'));
     this.scores = this.scoreCollection.snapshotChanges()
       .map(actions => {
         return actions.map( a => {
@@ -52,9 +54,17 @@ export class MatchdayComponent implements OnInit {
     const dialogRef = this.dialog.open(ScoreDialogComponent, {
       panelClass: 'fnpc-dialog'
     });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  openNewUserDialog() {
+    const dialogRef = this.dialog.open(UserToMatchdayDialogComponent, {
+      panelClass: 'fnpc-dialog',
+    });
+  }
+
+  openMatchdayDialog() {
+    const dialogRef = this.dialog.open(MatchdayDialogComponent, {
+      panelClass: 'fnpc-dialog',
     });
   }
 
@@ -62,8 +72,4 @@ export class MatchdayComponent implements OnInit {
     this.globalVars.selectedPlayer = playerid;
     this.globalVars.selectedScore = scoreid;
   }
-
-  /*this.scoreDoc = this.firestore.doc('scores/' + playerId);
-  this.score = this.scoreDoc.valueChanges();
-  console.log(this.scoreDoc.ref.path);*/
 }

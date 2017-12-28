@@ -14,7 +14,7 @@ export class ScoreDialogComponent implements OnInit {
   selectedScore: AngularFirestoreDocument<IScore>;
   score: any;
 
-  playerScore: number;
+  playerChips: number;
   playerBuyIn: number;
 
   constructor(private firestore: AngularFirestore, private globalVars: GlobalVars) { }
@@ -26,7 +26,7 @@ export class ScoreDialogComponent implements OnInit {
     this.score.subscribe(value => {
       const player = value.payload.data().player;
 
-      this.playerScore = value.payload.data().value;
+      this.playerChips = value.payload.data().chips;
       this.playerBuyIn = value.payload.data().buyin;
     });
 
@@ -34,8 +34,12 @@ export class ScoreDialogComponent implements OnInit {
 
   insertScore() {
     this.firestore.doc("scores/" + this.globalVars.selectedScore).update({
-      value: this.playerScore,
-      buyin: this.playerBuyIn
+      chips: this.playerChips,
+      buyin: this.playerBuyIn,
+      totalscore: this.playerChips - this.playerBuyIn
     });
+  }
+  deleteScore() {
+    this.firestore.doc("scores/" + this.globalVars.selectedScore).delete();
   }
 }

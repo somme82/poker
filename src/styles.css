@@ -9,13 +9,40 @@ body{
 }
 
 div.fnpc-headline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 10%;
-  background-color: #555;
+  height: 10% !important;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
   color: white;
-  text-shadow: none;
+}
+
+div.fnpc-headline-item-left {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  cursor: hand !important;
+  background-color: #555;
+  width: 10% !important;
+}
+
+div.fnpc-headline-item-middle {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  cursor: hand !important;
+  background-color: #555;
+}
+
+div.fnpc-headline-item-right {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  cursor: hand !important;
+  background-color: #555;
+  width: 10% !important;
 }
 
 div.fnpc-dialog-headline {

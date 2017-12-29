@@ -31,12 +31,18 @@ interface IScore_id extends IScore{
 
 
 export class MatchdayComponent implements OnInit {
+
+
+  venue: string = '';
+  date: Date;
+
   scoreCollection: AngularFirestoreCollection<IScore>;
   scores: any;
 
 
-  scoreDoc: AngularFirestoreDocument<IScore>;
-  score: Observable<IScore>;
+  selectedMatchday: AngularFirestoreDocument<IMatchday>;
+  matchday: any;
+
 
   matchdayCollection: AngularFirestoreCollection<IMatchday>;
   matchdays: any;
@@ -44,17 +50,9 @@ export class MatchdayComponent implements OnInit {
   constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
-    console.log(this.globalVars.matchdayId);
 
-    if (this.globalVars.matchdayId == '')
-    {
-      console.log("matchdayid empty!");
       this.setMatchdays();
-    } else{
-      console.log("matchdayid set!");
-      this.getScoreOfMatchday();
-    }
-    console.log(this.globalVars.matchdayId);
+
   }
 
   openScoreDialog() {
@@ -82,7 +80,7 @@ export class MatchdayComponent implements OnInit {
 
   public setMatchdays()
   {
-    this.matchdayCollection = this.firestore.collection('matchdays', ref => ref.orderBy('date', 'desc'));
+    this.matchdayCollection = this.firestore.collection('matchdays', ref => ref.orderBy('date', 'asc'));
     this.matchdays = this.matchdayCollection.snapshotChanges()
       .map(actions => {
         return actions.map( a => {
@@ -92,15 +90,18 @@ export class MatchdayComponent implements OnInit {
         });
       });
 
-    this.matchdays.subscribe(md => {
-      this.matchdays = md;
-      console.log(this.matchdays);
-      if (this.matchdays && this.matchdays.length > 0) {
-        this.globalVars.matchdayId = this.matchdays[this.matchdays.length - 1].id;
-      }
-      this.getScoreOfMatchday();
+    if (this.globalVars.matchdayId == '')
+    {
+      this.matchdays.subscribe(md => {
+        this.matchdays = md;
+        if (this.matchdays && this.matchdays.length > 0) {
+          this.globalVars.matchdayId = this.matchdays[this.matchdays.length - 1].id;
+        }
+        this.getScoreOfMatchday();
 
-    });
+      });
+    }
+
 
   }
 
@@ -116,28 +117,32 @@ export class MatchdayComponent implements OnInit {
           return {id, data};
         });
       });
+
+    this.selectedMatchday = this.firestore.doc("matchdays/" + this.globalVars.matchdayId);
+    this.matchday = this.selectedMatchday.snapshotChanges();
+    this.matchday.subscribe(value => {
+
+      this.venue = value.payload.data().venue;
+      this.date = value.payload.data().date;
+    });
   }
 
   getNextMatchday(){
-    console.log("getPreviousMatchday");
-    this.matchdays = this.matchdayCollection.snapshotChanges()
-      .map(actions => {
-        return actions.map( a => {
-          const data = a.payload.doc.data() as IMatchday;
-          const id = a.payload.doc.id;
-          return {id, data};
-        });
-      });
-
+    this.matchdays = this.getMatchdaySnapshotChanges();
     this.matchdays.subscribe(md => {
       this.matchdays = md;
-      console.log(this.matchdays);
       if (this.matchdays && this.matchdays.length > 0) {
-        this.matchdays.forEach(matchday => {
-          console.log(matchday.data.venue);
-        });
+        var index = 0;
 
-        this.globalVars.matchdayId = this.matchdays[this.matchdays.length - 1].id;
+        this.matchdays.forEach(matchday => {
+          if (matchday.id == this.globalVars.matchdayId && index !== this.matchdays.length -1)
+          {
+            console.log('selected ID' + (index+1));
+            this.globalVars.matchdayId = this.matchdays[index +1].id;
+          } else{
+            index ++;
+          }
+        });
       }
       this.getScoreOfMatchday();
 
@@ -146,7 +151,37 @@ export class MatchdayComponent implements OnInit {
   }
 
   getPreviousMatchday(){
-    console.log("getNextMatchday");
+    this.matchdays = this.getMatchdaySnapshotChanges();
+    this.matchdays.subscribe(md => {
+      this.matchdays = md;
+      if (this.matchdays && this.matchdays.length > 0) {
+        var index = 0;
+
+        this.matchdays.forEach(matchday => {
+          if (matchday.id == this.globalVars.matchdayId && index !== 0)
+          {
+            console.log('selected ID' + (index -1));
+            this.globalVars.matchdayId = this.matchdays[index -1].id;
+          }
+          index ++;
+        });
+      }
+      this.getScoreOfMatchday();
+
+    });
   }
+
+  getMatchdaySnapshotChanges()
+  {
+    return this.matchdayCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map( a => {
+          const data = a.payload.doc.data() as IMatchday;
+          const id = a.payload.doc.id;
+          return {id, data};
+        });
+      });
+  }
+
 
 }

@@ -1,8 +1,9 @@
 <div class="fnpc-headline">
-  <span class="fnpc-pull-left"><img src="../../assets/images/carat-l-white.svg"></span>
-  Rangliste
-  <span class="fnpc-pull-right"><img src="../../assets/images/carat-r-white.svg"></span>
+  <div class="fnpc-headline-item-left" (click)="getPreviousYear()"><img src="../../assets/images/carat-l-white.svg"></div>
+  <div class="fnpc-headline-item-middle">Rangliste 2017</div>
+  <div class="fnpc-headline-item-right" (click)="getNextYear()"><img src="../../assets/images/carat-r-white.svg"></div>
 </div>
+
 <div class="fnpc-content">
   <div [ngClass]="{'fnpc-profile': true, 'active': player.name == globalVars.selectedPlayer}" *ngFor="let player of players | async" (click)="setPlayer( player.name )">
     <div class="fnpc-profile-avatar">

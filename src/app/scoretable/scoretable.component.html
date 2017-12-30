@@ -4,17 +4,19 @@
   <div class="fnpc-headline-item-right" (click)="getNextYear()"><img src="../../assets/images/carat-r-white.svg"></div>
 </div>
 
-<div class="fnpc-content">
-  <div [ngClass]="{'fnpc-profile': true, 'active': player.name == globalVars.selectedPlayer}" *ngFor="let player of players | async" (click)="setPlayer( player.name )">
-    <div class="fnpc-profile-avatar">
-      <img src="../../assets/images/home-black.svg">
+<div class="fnpc-content" >
+  <!--div *ngIf="resultsInit == true"-->
+    <div [ngClass]="{'fnpc-profile': true, 'active': player.name == globalVars.selectedPlayer}" *ngFor="let player of players | async" (click)="setPlayer( player.name )">
+      <div class="fnpc-profile-avatar">
+        <img src="../../assets/images/home-black.svg">
+      </div>
+      <div class="fnpc-profile-head">
+        <strong>{{player.data.name}}</strong>
+        <span class="fnpc-pull-right"><strong>{{player.data.totalscore}} €</strong></span>
+      </div>
+      <div class="fnpc-profile-rebuy">rebuy {{player.data.totalbuyin}}</div>
     </div>
-    <div class="fnpc-profile-head">
-      <strong>{{player.name}}</strong>
-      <span class="fnpc-pull-right"><strong>Totalscore €</strong></span>
-    </div>
-    <div class="fnpc-profile-rebuy">rebuy</div>
-  </div>
+  <!--/-->
 </div>
 <div class="fnpc-menu-bottom">
   <a class="fnpc-menu-item" mat-button (click)="openDialog()"><img src="../../assets/images/plus-white.svg"></a>

@@ -24,8 +24,6 @@ export class ScoreDialogComponent implements OnInit {
     this.selectedScore = this.firestore.doc("scores/" + this.globalVars.selectedScore);
     this.score = this.selectedScore.snapshotChanges();
     this.score.subscribe(value => {
-      const player = value.payload.data().player;
-
       this.playerChips = value.payload.data().chips;
       this.playerBuyIn = value.payload.data().buyin;
     });

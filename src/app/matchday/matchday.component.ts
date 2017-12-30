@@ -50,25 +50,23 @@ export class MatchdayComponent implements OnInit {
   constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
-
       this.setMatchdays();
-
   }
 
   openScoreDialog() {
-    const dialogRef = this.dialog.open(ScoreDialogComponent, {
+    this.dialog.open(ScoreDialogComponent, {
       panelClass: 'fnpc-dialog'
     });
   }
 
   openNewUserDialog() {
-    const dialogRef = this.dialog.open(UserToMatchdayDialogComponent, {
+    this.dialog.open(UserToMatchdayDialogComponent, {
       panelClass: 'fnpc-dialog',
     });
   }
 
   openMatchdayDialog() {
-    const dialogRef = this.dialog.open(MatchdayDialogComponent, {
+    this.dialog.open(MatchdayDialogComponent, {
       panelClass: 'fnpc-dialog',
     });
   }

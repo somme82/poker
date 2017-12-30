@@ -18,7 +18,8 @@ export class UserDialogComponent implements OnInit {
   insertPlayer() {
     this.firestore.collection("players").add({
       name: this.userName,
-      totalscore: 0
+      totalscore: 0,
+      totalbuyin: 0
     });
   }
 }

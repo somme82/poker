@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: '', component: MatchdayComponent},
   { path: 'matchday', component: MatchdayComponent },
   { path: 'scoretable', component: ScoretableComponent },
-  { path: 'articles', component: ArticlesComponent }
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

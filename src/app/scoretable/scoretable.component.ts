@@ -149,4 +149,8 @@ export class ScoretableComponent implements OnInit {
   getNextYear()
   {
   }
+
+  getPreviousYear()
+  {
+  }
 }

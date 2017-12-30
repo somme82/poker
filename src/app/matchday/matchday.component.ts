@@ -96,12 +96,12 @@ export class MatchdayComponent implements OnInit {
         this.matchdays = md;
         if (this.matchdays && this.matchdays.length > 0) {
           this.globalVars.matchdayId = this.matchdays[this.matchdays.length - 1].id;
+          this.getScoreOfMatchday();
         }
-        this.getScoreOfMatchday();
-
       });
+    }else{
+      this.getScoreOfMatchday();
     }
-
 
   }
 

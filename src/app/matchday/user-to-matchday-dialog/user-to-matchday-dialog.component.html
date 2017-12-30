@@ -1,11 +1,11 @@
 <div class="fnpc-dialog-headline">Spieler hinzufügen</div>
 <mat-dialog-content>
-  <div class="fnpc-profile" (click)='insertPlayer(player.name)' *ngFor="let player of players | async">
+  <div class="fnpc-profile" (click)='insertPlayer(player.id)' *ngFor="let player of players | async">
     <div class="fnpc-profile-avatar">
       <img src="../../assets/images/home-black.svg">
     </div>
     <div class="fnpc-profile-head">
-      <strong>{{player.name}}</strong>
+      <strong>{{player.data.name}}</strong>
     </div>
   </div>
 </mat-dialog-content>

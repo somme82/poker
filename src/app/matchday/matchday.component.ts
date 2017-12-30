@@ -8,7 +8,7 @@ import { ScoreDialogComponent } from './score-dialog/score-dialog.component';
 import { UserToMatchdayDialogComponent } from './user-to-matchday-dialog/user-to-matchday-dialog.component';
 import {MatchdayDialogComponent} from './matchday-dialog/matchday-dialog.component';
 import {AppModule} from '../app.module';
-import {IMatchday} from '../scoretable/scoretable.component';
+import {IMatchday, IPlayer} from '../scoretable/scoretable.component';
 
 
 export interface IScore {
@@ -31,7 +31,8 @@ interface IScore_id extends IScore{
 
 
 export class MatchdayComponent implements OnInit {
-
+  playersCollection: AngularFirestoreCollection<IPlayer>;
+  players: any;
 
   venue: string = '';
   date: Date;
@@ -50,6 +51,17 @@ export class MatchdayComponent implements OnInit {
   constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
+    this.playersCollection = this.firestore.collection('players', ref => ref.orderBy('name', 'asc'));
+    this.players = this.playersCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as IMatchday;
+          const id = a.payload.doc.id;
+          return {id, data};
+        });
+      });
+    console.log(this.players );
+
       this.setMatchdays();
   }
 
@@ -80,12 +92,12 @@ export class MatchdayComponent implements OnInit {
   {
     this.matchdayCollection = this.firestore.collection('matchdays', ref => ref.orderBy('date', 'asc'));
     this.matchdays = this.matchdayCollection.snapshotChanges()
-      .map(actions => {
-        return actions.map( a => {
-          const data = a.payload.doc.data() as IMatchday;
-          const id = a.payload.doc.id;
-          return {id, data};
-        });
+        .map(actions => {
+          return actions.map( a => {
+            const data = a.payload.doc.data() as IMatchday;
+            const id = a.payload.doc.id;
+            return {id, data};
+          });
       });
 
     if (this.globalVars.matchdayId == '')

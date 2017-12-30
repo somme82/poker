@@ -132,15 +132,12 @@ export class MatchdayComponent implements OnInit {
 
   getScoreOfMatchday()
   {
-    console.log(this.playersMap);
-    console.log('receiving score from of matchday: ' + this.globalVars.matchdayId);
     this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', this.globalVars.matchdayId).orderBy('totalscore', 'desc'));
     this.scores = this.scoreCollection.snapshotChanges()
       .map(actions => {
         return actions.map( a => {
           const data = a.payload.doc.data() as IScore;
           const playername = this.playersMap.get(data.player);
-          console.log(playername);
           const id = a.payload.doc.id;
           return {id, playername, data};
         });
@@ -165,7 +162,6 @@ export class MatchdayComponent implements OnInit {
         this.matchdays.forEach(matchday => {
           if (matchday.id == this.globalVars.matchdayId && index !== this.matchdays.length -1)
           {
-            console.log('selected ID' + (index+1));
             this.globalVars.matchdayId = this.matchdays[index +1].id;
           } else{
             index ++;
@@ -188,7 +184,6 @@ export class MatchdayComponent implements OnInit {
         this.matchdays.forEach(matchday => {
           if (matchday.id == this.globalVars.matchdayId && index !== 0)
           {
-            console.log('selected ID' + (index -1));
             this.globalVars.matchdayId = this.matchdays[index -1].id;
           }
           index ++;

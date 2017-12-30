@@ -84,13 +84,11 @@ export class ScoretableComponent implements OnInit {
   ngOnInit() {
     this.getPlayerResults();
     this.playersCollection = this.firestore.collection('players');
-    console.log(this.playerResults);
     this.players = this.playersCollection.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as IPlayer;
           const id = a.payload.doc.id;
-          console.log(id);
           if (this.playerResults.some(p=>p.id == id))  {
             data.totalscore = this.playerResults.find(p => p.id === id).totalscore;
             data.totalbuyin = this.playerResults.find(p => p.id === id).totalbuyin;
@@ -110,7 +108,6 @@ export class ScoretableComponent implements OnInit {
 
   getPlayerResults(){
       this.playerResults = new Array<IPlayer>()
-      console.log('begin getPlayerResults');
       this.scoreCollection = this.firestore.collection('scores');
       this.scores = this.scoreCollection.snapshotChanges()
         .map(actions => {
@@ -142,7 +139,6 @@ export class ScoretableComponent implements OnInit {
         this.playerResults = this.playerResults.sort(function(a, b){
           return b.totalscore-a.totalscore;
         });
-        console.log(this.playerResults);
       });
   }
 

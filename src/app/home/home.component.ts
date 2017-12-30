@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       });
 
     this.players.forEach(p => {
-      console.log(p.data);
+
     })
 
   }

@@ -29,7 +29,6 @@ export class MatchdayDialogComponent implements OnInit {
           return {id, data};
         });
       });
-    console.log(this.score);
 
     this.score.subscribe(sc => {
       this.score = sc;
@@ -42,7 +41,7 @@ export class MatchdayDialogComponent implements OnInit {
 
     });
     this.firestore.doc('matchdays/' + this.globalVars.matchdayId).delete();
-    
+
 
   }
 

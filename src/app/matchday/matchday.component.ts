@@ -48,6 +48,8 @@ export class MatchdayComponent implements OnInit {
   matchdayCollection: AngularFirestoreCollection<IMatchday>;
   matchdays: any;
 
+  playersMap: Map<string, string> = new Map<string, string>();
+
   constructor(private firestore: AngularFirestore, public globalVars: GlobalVars, public dialog: MatDialog ) {}
 
   ngOnInit(): void {
@@ -60,9 +62,22 @@ export class MatchdayComponent implements OnInit {
           return {id, data};
         });
       });
-    console.log(this.players );
 
-      this.setMatchdays();
+    this.players.subscribe( p => {
+      this.players = p;
+      if (this.players && this.players.length > 0) {
+        this.players.forEach(player => {
+          if (!this.playersMap.has(player.data.name))
+          {
+            this.playersMap.set(player.id, player.data.name);
+          }
+        });
+      }
+    });
+    this.setMatchdays();
+
+
+
   }
 
   openScoreDialog() {
@@ -117,14 +132,17 @@ export class MatchdayComponent implements OnInit {
 
   getScoreOfMatchday()
   {
+    console.log(this.playersMap);
     console.log('receiving score from of matchday: ' + this.globalVars.matchdayId);
     this.scoreCollection = this.firestore.collection('scores', ref => ref.where('matchday', '==', this.globalVars.matchdayId).orderBy('totalscore', 'desc'));
     this.scores = this.scoreCollection.snapshotChanges()
       .map(actions => {
         return actions.map( a => {
           const data = a.payload.doc.data() as IScore;
+          const playername = this.playersMap.get(data.player);
+          console.log(playername);
           const id = a.payload.doc.id;
-          return {id, data};
+          return {id, playername, data};
         });
       });
 

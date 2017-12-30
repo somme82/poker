@@ -14,6 +14,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import 'rxjs/add/observable/of';
 
 export interface IPlayer {
+  id: string;
   name: string;
   totalscore: number;
   totalbuyin: number;
@@ -45,7 +46,6 @@ export class ScoretableComponent implements OnInit {
   matchdayDate: Date;
   newMatchdayDoc: AngularFirestoreDocument<IScore>;
   newMatchday: any;
-
 
   playerResults: IPlayer[] = new Array<IPlayer>();
 
@@ -82,15 +82,30 @@ export class ScoretableComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPlayerResults();
     this.playersCollection = this.firestore.collection('players');
+    console.log(this.playerResults);
     this.players = this.playersCollection.snapshotChanges()
       .map(actions => {
-        return actions.map( a => {
+        return actions.map(a => {
           const data = a.payload.doc.data() as IPlayer;
           const id = a.payload.doc.id;
+          console.log(id);
+          if (this.playerResults.some(p=>p.id == id))  {
+            data.totalscore = this.playerResults.find(p => p.id === id).totalscore;
+            data.totalbuyin = this.playerResults.find(p => p.id === id).totalbuyin;
+          }
+
           return {id, data};
+        }).sort(function(a, b){
+          return b.data.totalscore-a.data.totalscore;
         });
       });
+
+
+
+
+
   }
 
   getPlayerResults(){
@@ -110,13 +125,13 @@ export class ScoretableComponent implements OnInit {
         this.scores = s;
         if (this.scores && this.scores.length > 0) {
           this.scores.forEach(s => {
-            if (this.playerResults.some(p => p.name === s.data.player))
+            if (this.playerResults.some(p => p.id === s.data.player))
             {
-              this.playerResults.find(p => p.name === s.data.player).totalscore += s.data.totalscore;
-              this.playerResults.find(p => p.name === s.data.player).totalbuyin += s.data.buyin;
+              this.playerResults.find(p => p.id === s.data.player).totalscore += s.data.totalscore;
+              this.playerResults.find(p => p.id === s.data.player).totalbuyin += s.data.buyin;
             } else {
               var player = <IPlayer>{};
-              player.name = s.data.player;
+              player.id = s.data.player;
               player.totalscore = s.data.totalscore;
               player.totalbuyin = s.data.buyin;
               this.playerResults.push(player);

@@ -4,19 +4,13 @@
 
 </div>
 <div class="fnpc-content">
-  <div *ngFor="let player of players | async">
-    <div >
-      {{player.data.totalscore}}
+  <div class="fnpc-table">
+    <div class="fnpc-table-row">
+      <div class="fnpc-table-cell">Name</div>
+      <div class="fnpc-table-cell"><input cdkFocusInitial [(ngModel)]="userName" name="username"/></div>
+      <div>{{userName}}</div>
     </div>
   </div>
 </div>
 
 
-<div class="fnpc-menu-bottom">
-  <a class="fnpc-menu-item" mat-button><img src="../../assets/images/recycle-white.svg"></a>
-  <a class="fnpc-menu-item" mat-button><img src="../../assets/images/plus-white.svg"></a>
-  <a class="fnpc-menu-item"><img src="../../assets/images/info-white.svg"></a>
-  <!--a class="fnpc-menu-item" mat-button (click)="openMatchdayDialog()" ><img src="../../assets/images/star-white.svg"></a-->
-  <!--a class="fnpc-menu-item"><img src="../../assets/images/edit-white.svg"></a-->
-  <!--a class="fnpc-menu-item"><img src="../../assets/images/mail-white.svg"></a-->
-</div>

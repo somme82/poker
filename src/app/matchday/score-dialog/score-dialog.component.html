@@ -1,13 +1,13 @@
-<div class="fnpc-dialog-headline">Neuen Spielstand eintragen</div><div class="fnpc-pull-right">X</div>
+<div class="fnpc-dialog-headline">Neuen Spielstand eintragen<div class="fnpc-pull-right">X</div></div>
 <mat-dialog-content>
   <div class="fnpc-table">
     <div class="fnpc-table-row">
       <div class="fnpc-table-cell">Spielstand</div>
-      <div class="fnpc-table-cell"><input cdkFocusInitial type="text" [(ngModel)]="playerChips"/></div>
+      <div class="fnpc-table-cell"><input cdkFocusInitial type="text" [(ngModel)]="score.chips"/></div>
     </div>
     <div class="fnpc-table-row">
       <div class="fnpc-table-cell">BuyIn</div>
-      <div class="fnpc-table-cell"><input type="text" [(ngModel)]="playerBuyIn"/></div>
+      <div class="fnpc-table-cell"><input type="text" [(ngModel)]="score.buyin"/></div>
     </div>
   </div>
 </mat-dialog-content>

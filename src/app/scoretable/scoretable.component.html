@@ -6,7 +6,7 @@
 
 <div class="fnpc-content" >
   <!--div *ngIf="resultsInit == true"-->
-    <div [ngClass]="{'fnpc-profile': true, 'active': player.name == globalVars.selectedPlayer}" *ngFor="let player of players | async" (click)="setPlayer( player.name )">
+    <div [ngClass]="{'fnpc-profile': true, 'active': player.id == globalVars.selectedPlayer}" *ngFor="let player of players | async" (click)="setPlayer( player.id )">
       <div class="fnpc-profile-avatar">
         <img src="../../assets/images/home-black.svg">
       </div>

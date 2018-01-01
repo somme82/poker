@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GlobalVars} from '../../globalVars';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import { FormsModule } from '@angular/forms';
 import {IMatchday, IPlayer} from '../scoretable/scoretable.component';
 
 @Component({
@@ -12,9 +13,12 @@ export class HomeComponent implements OnInit {
   playersCollection: AngularFirestoreCollection<IPlayer>;
   players: any;
 
+  userName: string;
+
   constructor(private globalVars: GlobalVars, private firestore: AngularFirestore) {}
 
   ngOnInit() {
+    this.userName = '';
     this.playersCollection = this.firestore.collection('players', ref => ref.orderBy('name', 'asc'));
     this.players = this.playersCollection.snapshotChanges()
       .map(value => {

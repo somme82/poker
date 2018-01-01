@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {Component, OnInit} from '@angular/core';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {IPlayer} from '../scoretable.component';
+import {Observable} from 'rxjs/Observable';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-dialog',
@@ -8,20 +11,25 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 })
 export class UserDialogComponent implements OnInit {
 
-  userName: string = '';
+  playerObs: any;
+  player: IPlayer;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+    this.player = <IPlayer>{};
+    this.player.name = '';
+    this.player.totalscore = 0;
+    this.player.totalbuyin = 0;
+    this.playerObs = Observable.of(this.player);
+    this.playerObs.subscribe(value => {
+      this.playerObs = value;
+    });
+  }
 
   ngOnInit() {
   }
 
   insertPlayer() {
-    console.log(this.userName);
-    this.firestore.collection("players").add({
-      name: this.userName,
-      totalscore: 0,
-      totalbuyin: 0
-    });
+    this.firestore.collection("players").add(this.player);
   }
 }
 

@@ -3,7 +3,8 @@
   <div class="fnpc-table">
     <div class="fnpc-table-row">
       <div class="fnpc-table-cell">Name</div>
-      <div class="fnpc-table-cell"><input cdkFocusInitial type="text" [(ngModel)]="userName"/></div>
+      <div class="fnpc-table-cell"><input cdkFocusInitial [(ngModel)]="playerObs.name"/></div>
+      <div>{{playerObs.name}}</div>
     </div>
   </div>
 </mat-dialog-content>
